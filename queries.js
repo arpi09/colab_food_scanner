@@ -28,9 +28,9 @@ const getUserById = (request, response) => {
 }
 
 const createUser = (request, response) => {
-    const { name, email } = request.body
+    const { firstname, lastname, email } = request.body
   
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+    pool.query('INSERT INTO users (firstname, lastname, email) VALUES ($1, $2)', [firstname, lastname, email], (error, results) => {
         if (error) {
             throw error
         }
@@ -40,11 +40,11 @@ const createUser = (request, response) => {
 
 const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
-    const { name, email } = request.body
+    const { firstname, lastname, email } = request.body
   
     pool.query(
-        'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-        [name, email, id],
+        'UPDATE users SET firstname = $1, lastname = $2, email = $3 WHERE id = $4',
+        [firstname, lastname, email, id],
         (error, results) => {
             if (error) {
                 throw error

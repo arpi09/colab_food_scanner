@@ -19,6 +19,8 @@ def main():
             try:
                 with urllib.request.urlopen("http://api.dabas.com/DABASService/V2/article/gtin/" + gtin['GTIN'] + "?apikey=" + os.getenv('DABAS_API_KEY')) as url:
                     data = json.loads(url.read().decode())
+            except:
+                print("Couldn't find GTIN: " + gtin["GTIN"])
 
                 print(json.dumps(data, indent=4, sort_keys=True, separators=(',', ': ')))
 
@@ -34,9 +36,11 @@ def main():
 
                 req.add_header('Content-Type', 'application/json')
 
-                resp = urllib.request.urlopen(req)
-            except:
-                print("Couldn't add GTIN: " + gtin["GTIN"])
+                try:
+                    resp = urllib.request.urlopen(req)
+                except:
+                    print("Couldn't add data GTIN: " + gtin["GTIN"])
+            
 
 if __name__ == "__main__":
     main()

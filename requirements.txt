@@ -1,0 +1,4 @@
+requests
+json
+load_dotenv
+os

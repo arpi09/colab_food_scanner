@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
 
 app.get('/products', db.getProducts)
 app.get('/products/:id', db.getProductById)
-app.post('/users', db.createUser)
+app.post('/products', db.createProduct)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 

@@ -31,9 +31,9 @@ const getProductById = (request, response) => {
 }
 
 const createProduct = (request, response) => {
-    const { barcodeid, json } = request.body
+    const { barcodeid, jsonString } = request.body
   
-    pool.query('INSERT INTO Products (barcodeid, json) VALUES ($1, $2)', [barcodeid, json], (error, results) => {
+    pool.query('INSERT INTO Products (barcodeid, json) VALUES ($1, $2)', [barcodeid, jsonString], (error, results) => {
         if (error) {
             throw error
         }

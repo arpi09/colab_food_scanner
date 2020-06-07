@@ -16,7 +16,7 @@ def main():
         # for gtin in data:
         #     print(gtin["GTIN"])
         # Data dict
-    data = { 'barcodeid': 123, 'json': "test" }
+    data = { 'barcodeid': "123", 'jsonString': "test" }
 
     # Dict to Json
     # Difference is { "test":10, "test2":20 }
@@ -27,9 +27,11 @@ def main():
 
     # Convert string to byte
     data = data.encode('utf-8')
-
+    
     # Post Method is invoked if data != None
     req =  urllib.request.Request("https://dry-scrubland-94711.herokuapp.com/products", data=data)
+
+    req.add_header('Content-Type', 'application/json')
 
     # Response
     resp = urllib.request.urlopen(req)

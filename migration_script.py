@@ -16,25 +16,27 @@ def main():
         for gtin in gtinList:
             print(gtin["GTIN"])
 
-            with urllib.request.urlopen("http://api.dabas.com/DABASService/V2/article/gtin/" + gtin["GTIN"] + "?apikey=" + os.getenv('DABAS_API_KEY')) as url:
-                data = json.loads(url.read().decode())
+            try:
+                with urllib.request.urlopen("http://api.dabas.com/DABASService/V2/article/gtin/" + gtin['GTIN'] + "?apikey=" + os.getenv('DABAS_API_KEY')) as url:
+                    data = json.loads(url.read().decode())
 
-            print(json.dumps(data, indent=4, sort_keys=True, separators=(',', ': ')))
+                print(json.dumps(data, indent=4, sort_keys=True, separators=(',', ': ')))
 
-            data = { 'gtin': data['GTIN'], 'name': data['Hyllkantstext'], 'ingrdients': data['Ingrediensforteckning'], 'allergens': data['Allergener'] }
+                data = { 'gtin': data['GTIN'], 'name': data['Hyllkantstext'], 'ingredients': data['Ingrediensforteckning'], 'allergens': data['Allergener'] }
 
-            data = json.dumps(data)
+                data = json.dumps(data)
 
-            data = str(data)
+                data = str(data)
 
-            data = data.encode('utf-8')
-            
-            req =  urllib.request.Request("https://dry-scrubland-94711.herokuapp.com/products", data=data)
+                data = data.encode('utf-8')
+                
+                req =  urllib.request.Request("https://dry-scrubland-94711.herokuapp.com/products", data=data)
 
-            req.add_header('Content-Type', 'application/json')
+                req.add_header('Content-Type', 'application/json')
 
-            resp = urllib.request.urlopen(req)
-
+                resp = urllib.request.urlopen(req)
+            except:
+                print("Couldn't add GTIN: " + gtin["GTIN"])
 
 if __name__ == "__main__":
     main()

@@ -33,7 +33,7 @@ const getProductById = (request, response) => {
 const createProduct = (request, response) => {
     const { gtin, ingredients, allergens, name } = request.body
   
-    pool.query('INSERT INTO Products (gtin, ingredients, allergens) VALUES ($1, $2, $3, $4)', [gtin, ingredients, allergens, name], (error, results) => {
+    pool.query('INSERT INTO Products (gtin, ingredients, allergens, name) VALUES ($1, $2, $3, $4)', [gtin, ingredients, allergens, name], (error, results) => {
         if (error) {
             throw error
         }

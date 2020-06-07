@@ -5,7 +5,7 @@ const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_P
 const isProduction = process.env.NODE_ENV === 'production'
 
 const pool = new Pool({
-    connectionString: isProduction ? process.env.DATABASE_URL : connectionString
+    connectionString: isProduction ? process.env.HEROKU_POSTGRESQL_BRONZE_URL : connectionString
 })
 
 

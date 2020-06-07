@@ -20,9 +20,9 @@ const getProducts = (request, response) => {
 }
 
 const getProductById = (request, response) => {
-    const id = parseInt(request.params.id)
+    const gtin = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM Products WHERE barcodeid = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM Products WHERE gtin = $1', [gtin], (error, results) => {
         if (error) {
             throw error
         }
@@ -31,9 +31,9 @@ const getProductById = (request, response) => {
 }
 
 const createProduct = (request, response) => {
-    const { barcodeid, jsonString } = request.body
+    const { gtin, ingredients, allergens } = request.body
   
-    pool.query('INSERT INTO Products (barcodeid, json) VALUES ($1, $2)', [barcodeid, jsonString], (error, results) => {
+    pool.query('INSERT INTO Products (gtin, ingredients, allergens) VALUES ($1, $2, $3)', [gtin, ingredients, allergens], (error, results) => {
         if (error) {
             throw error
         }

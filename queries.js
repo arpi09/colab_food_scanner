@@ -20,7 +20,7 @@ const getProducts = (request, response) => {
 }
 
 const getProductById = (request, response) => {
-    const gtin = parseInt(request.params.id)
+    const gtin = parseInt(request.params.gtin)
   
     pool.query('SELECT * FROM Products WHERE gtin = $1', [gtin], (error, results) => {
         if (error) {
